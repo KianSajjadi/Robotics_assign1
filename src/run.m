@@ -1,0 +1,2 @@
+workbench = Workbench;
+workbench.stackBricks;

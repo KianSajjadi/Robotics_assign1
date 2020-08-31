@@ -1,3 +1,6 @@
+%% createProp
+%function that reads a polygon file and renders a static prop using the
+%vertices and the location at which the prop will be
 function prop_h = createProp(propName, locationTr, colour)
     [faces, points, data] = plyread(propName, "tri");
 	hold on

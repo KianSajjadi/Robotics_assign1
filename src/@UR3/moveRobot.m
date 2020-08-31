@@ -1,14 +1,23 @@
-%% moveRobot
-%this function utilises the animateRobot function to move the robot arm to
-%a specific location that is determined by a goal transform and the current
-%joints of the robot. Using the goal transform and inverse kinematics we
-%can find the goal joints and thus get a pose qMatrix by utilising the
-%trapezoidal velocity profile.
-%This function also returns value endJoints = goalJoints so that we can
-%make the next maneuvre afterwards.
-function endJoints = moveRobot(robot, goalTr, isHolding, prop, eff2PropTr, currentJoints, numSteps)
-    goalJoints = robot.model.ikcon(goalTr, currentJoints);
+%% getRobotEndJoints
+%this function utilises the qMatrix generated through using the quintic
+%polynomial jtratj function. The trapezoidal function was originally used
+%however would come up with erratic robot arm movements. This function
+%takes a robot arm, a goal transformation and the current joints to
+%generate the endJoints of the robot movements.
+function endJoints = getRobotEndJoints(robot, goalTr, isHolding, prop, eff2PropTr, currentJoints, numSteps)
+    goalJoints = robot.model.ikine(goalTr, currentJoints);
 	qMatrix = robot.getPoseQMatrix(currentJoints, goalJoints, numSteps);
 	endJoints = goalJoints;
-	robot.animateRobot(qMatrix, isHolding, prop, eff2PropTr);
+	numStepsMtx = size(qMatrix);
+    numSteps = numStepsMtx(1);
+    for i = 1:numSteps
+        drawnow()
+        %animate doesn't save end effector position, therefore we must use
+        %forward kinematics to calculate it
+        animate(robot.model, qMatrix(i, :));
+        %animate prop motion
+        if isHolding == true
+            prop.updatePos(robot.model.fkine(qMatrix(i, :)) * eff2PropTr);
+        end
+    end
 end

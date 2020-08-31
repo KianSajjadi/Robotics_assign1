@@ -30,16 +30,13 @@ classdef Workbench < handle
             
         end
             
-        function preRenderCalculationsList = generatePreRenderCalculations(self)
+        function preRenderCalculations = generatePreRenderC(self)
+
             isHolding = false;
             eff2PropTr = transl(0, 0, -0.073);
             currentJoints = zeros(1, 6);
             numSteps = 120;
 
-        end
-        
-        function renderScene(preRenderCalculationsList)
-            
         end
     end
     

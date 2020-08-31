@@ -11,6 +11,7 @@ classdef Brick < handle
 	methods
 		function self = Brick(startTr)
             if nargin > 0
+                self.pos = transl(startTr);
                 [faces, points, data] = getPolyData(self);
                 self.faces = faces;
                 self.points = points;
@@ -18,8 +19,7 @@ classdef Brick < handle
                 numPoints = size(points);
                 self.numPoints = numPoints(1);
                 self.brick_h = self.initBrick(faces, points);
-                self.updatePos(startTr);
-                self.pos = transl(startTr);
+                self.updatePos(startTr);                
                 drawnow();
             end
         end

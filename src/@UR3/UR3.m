@@ -53,7 +53,7 @@ classdef UR3 < handle
         % Given a robot index, add the glyphs (vertices and faces) and
         % colour them in if data is available 
         function PlotAndColourRobot(self)%robot,workspace)
-            for linkIndex = 0 : self.model.n
+            for linkIndex = 0:self.model.n
                 if self.useGripper && linkIndex == self.model.n
                     [ faceData, vertexData, plyData{linkIndex + 1} ] = plyread(['UR3Link', num2str(linkIndex), 'Gripper.ply'], 'tri'); %#ok<AGROW>
                 else
