@@ -11,7 +11,9 @@ classdef Brick < handle
 	methods
 		function self = Brick(startTr)
             if nargin > 0
-                self.pos = transl(startTr);
+                startVector = transl(startTr);
+                startVector(3, 1) = startVector(3, 1) + 0.072;
+                self.pos = startVector;
                 [faces, points, data] = getPolyData(self);
                 self.faces = faces;
                 self.points = points;
@@ -34,9 +36,9 @@ classdef Brick < handle
 			hold off
 		end
 		
-		function updatePos(self, brickTr)
+		function updatePos(self, goalTr)
 			for i = 1:self.numPoints
-				self.brick_h.Vertices(i, :) = transl(brickTr * transl(self.points(i, :)))';
+				self.brick_h.Vertices(i, :) = transl(goalTr * transl(self.points(i, :)))';
 			end
 		end
 		

@@ -17,7 +17,7 @@ function maximumReachAndVolume = getMaximumReachAndVolume(robot)
     XZRadius = robot.getPlaneRadius('XZ', XZPointCloud);
     %plot(XZPointCloud(:, 1), XZPointCloud(:, 3), 'r.');
     maximumReachAndVolume(2, 1) = XZRadius;
-    XZRadiusDisp = ['volume = ', num2str(XZRadius), 'm'];
+    XZRadiusDisp = ['XZRadius = ', num2str(XZRadius), 'm'];
     disp(XZRadiusDisp);
     
     %Volume
