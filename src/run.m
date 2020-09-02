@@ -1,2 +1,2 @@
 workbench = Workbench;
-workbench.renderScene;
+workbench.renderScene;          

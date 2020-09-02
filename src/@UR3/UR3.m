@@ -28,7 +28,7 @@ classdef UR3 < handle
         self.PlotAndColourRobot();
         
         %robot params =
-        self.maximumReachAndVolume = self.getMaximumReachAndVolume;
+        self.maximumReachAndVolume = self.getMaximumReachAndVolume; 
         end
 
         %% GetUR3Robot
